@@ -19,11 +19,21 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: file_storage_development
+  #<<: *default
+  primary:
+    database: file_storage_development
+    adapter: postgresql
+    encoding: unicode
+    #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  blobs:
+    database: file_storage_development_blobs
+    adapter: postgresql
+    encoding: unicode
+    #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    migrations_paths: db/blobs
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

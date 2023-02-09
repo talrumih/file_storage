@@ -1,0 +1,2 @@
+class BlobDb < SecondaryBlob
+end

@@ -9,6 +9,8 @@ class Blob < ApplicationRecord
             File.open(Rails.root.join("public",uuid), 'wb') do |f|
                 f.write(Base64.decode64(data))
             end
+        elsif uuid && self.storage_type == "db"
+            BlobDb.create!(uuid: uuid, data: data)
         else
             self.errors.add(:storage_type, "Only Local")
         end
@@ -17,6 +19,10 @@ class Blob < ApplicationRecord
         if !self[:data] && self.storage_type == "local"
             decoded = File.open(Rails.root.join("public", uuid)).read
             self[:data] = Base64.encode64(decoded)
+        elsif !self[:data] && self.storage_type == "db"
+            self[:data] = BlobDb.find_by_uuid(uuid).data
+        else
+            self[:data]
         end
     end
 end
