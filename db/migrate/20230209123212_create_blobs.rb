@@ -4,6 +4,8 @@ class CreateBlobs < ActiveRecord::Migration[6.0]
       t.string :uuid, null: false
       t.integer :filesize
       t.integer :storage_type
+      t.string :content_type
+      t.string :ext
 
       t.timestamps
     end

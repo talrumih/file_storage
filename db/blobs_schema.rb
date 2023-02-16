@@ -10,28 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_16_153004) do
+ActiveRecord::Schema.define(version: 2023_02_09_153443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "blobs", force: :cascade do |t|
-    t.string "uuid", null: false
-    t.integer "filesize"
-    t.integer "storage_type"
-    t.string "content_type"
-    t.string "ext"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["uuid"], name: "index_blobs_on_uuid", unique: true
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "token"
-    t.boolean "active"
-    t.datetime "last_used"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table "blob_dbs", force: :cascade do |t|
+    t.string "uuid"
+    t.string "data"
   end
 
 end
